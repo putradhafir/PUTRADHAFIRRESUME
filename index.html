@@ -432,7 +432,7 @@ Dari sudut pandang komputasi, constant constructor memungkinkan <strong>canonica
 // NIM         : 251410009
 // Kelas       : SISTEM INFORMASI SI2A
 
-import 'dart:convert';
+'dart:convert';
 class Mobil {
   String? merk;
   int? tahun;
@@ -593,7 +593,7 @@ void main(){
 <!-- 5 -->
 <div class="section" id="section5">
 
-<h2>5. CLASS MAHASISWA </h2>
+<h2>5. PRAKTIK 1 CLASS MAHASISWA </h2>
 
 <p>
 Jika data privat adalah ruang tersembunyi, maka getter adalah <strong>jendela</strong> yang memungkinkan kita melihat ke dalam tanpa bisa menyentuh. Getter adalah method khusus yang memberikan akses baca (read-only) ke field privat, menjaga agar data tidak termodifikasi secara langsung.
@@ -665,7 +665,7 @@ void main() {
 <!-- 6 -->
 <div class="section" id="section6">
 
-<h2>6. CLASS PERSON </h2>
+<h2>6. ENKAPSULASI CLASS PERSON </h2>
 
 <p>
 Jika getter adalah jendela, maka setter adalah <strong>pintu gerbang</strong> yang dijaga ketat. Setter memungkinkan perubahan data privat, namun dengan aturan yang telah ditentukan. Sebelum nilai baru disimpan, setter bisa melakukan validasi, sanitasi, atau bahkan menolak perubahan jika tidak memenuhi syarat.
@@ -706,7 +706,7 @@ void main() {
 <!-- 7 -->
 <div class="section" id="section7">
 
-<h2>7. CLASS PERSON LENGKAP </h2>
+<h2>7. CLASS GETTER DAN SETTER </h2>
 
 <p>
 Dalam hidup, kita bisa mencapai tujuan melalui berbagai jalan. Demikian pula dalam Dart, sebuah class bisa memiliki banyak constructor—masing-masing menawarkan cara berbeda untuk menciptakan objek. Inilah yang disebut <strong>named constructor</strong>.
@@ -841,10 +841,10 @@ void main() {
 
 </div>
 
-<!-- 9 - SECTION BARU DENGAN LINK DARTPAD TAMBAHAN -->
+<!-- 9 - PRAKTIK 3 REKENING BANK -->
 <div class="section" id="section9">
 
-<h2>9. CLASS KALKULATOR </h2>
+<h2>9. PRAKTIK REKENING BANK </h2>
 
 <p>
 Setiap class adalah blueprint yang mendefinisikan struktur dan perilaku objek. Seperti cetakan kue yang menentukan bentuk akhir kue, class menentukan bagaimana objek akan diciptakan dan berinteraksi. Dalam pemrograman berorientasi objek, class adalah fondasi dari segalanya.
@@ -858,64 +858,42 @@ Class membungkus data (properti) dan perilaku (method) dalam satu kesatuan yang 
 // Nama        : Putra Dhafir Nashrullah
 // NIM         : 251410009
 // Kelas       : SISTEM INFORMASI SI2A
+  
+class RekeningBank {
+  String _nomorRekening;
+  double _saldo;
 
-class Kalkulator {
-  // Properti
-  double? bilangan1;
-  double? bilangan2;
-  
-  // Constructor
-  Kalkulator(this.bilangan1, this.bilangan2);
-  
-  // Method untuk penjumlahan
-  double tambah() {
-    return (bilangan1 ?? 0) + (bilangan2 ?? 0);
-  }
-  
-  // Method untuk pengurangan
-  double kurang() {
-    return (bilangan1 ?? 0) - (bilangan2 ?? 0);
-  }
-  
-  // Method untuk perkalian
-  double kali() {
-    return (bilangan1 ?? 0) * (bilangan2 ?? 0);
-  }
-  
-  // Method untuk pembagian
-  double bagi() {
-    if (bilangan2 == 0 || bilangan2 == null) {
-      print('Error: Pembagian dengan nol tidak diperbolehkan!');
-      return 0;
+  RekeningBank(this._nomorRekening, this._saldo);
+
+  void deposit(double jml) {
+    if (jml > 0) {
+      _saldo += jml;
+      print('Deposit Rp $jml Berhasil.');
     }
-    return (bilangan1 ?? 0) / bilangan2!;
   }
-  
-  void tampilkanHasil() {
-    print('Bilangan 1: ${bilangan1 ?? 0}');
-    print('Bilangan 2: ${bilangan2 ?? 0}');
-    print('Hasil Penjumlahan: ${tambah()}');
-    print('Hasil Pengurangan: ${kurang()}');
-    print('Hasil Perkalian: ${kali()}');
-    print('Hasil Pembagian: ${bagi()}');
+
+  void tarik(double jml) {
+    if (jml > 0 && _saldo >= jml) {
+      _saldo -= jml;
+      print('Tarik Rp $jml Berhasil.');
+    } else {
+      print('Gagal: Saldo tidak cukup atau input tidak valid.');
+    }
+  }
+
+  void cekSaldo() {
+    print('Rekening: $_nomorRekening | Saldo: Rp $_saldo');
   }
 }
 
 void main() {
-  // Membuat objek Kalkulator
-  Kalkulator kalk = Kalkulator(10, 5);
-  
-  // Menampilkan hasil perhitungan
-  kalk.tampilkanHasil();
-  
-  print('\n--- Mencoba dengan bilangan negatif ---');
-  Kalkulator kalk2 = Kalkulator(-8, 4);
-  kalk2.tampilkanHasil();
-  
-  print('\n--- Mencoba pembagian dengan nol ---');
-  Kalkulator kalk3 = Kalkulator(15, 0);
-  kalk3.tampilkanHasil();
+  var bank = RekeningBank('2514-10002', 2000000);
+
+  bank.cekSaldo();
+  bank.tarik(500000);
+  bank.cekSaldo();
 }
+
 </code></pre>
 
 <div class="button-container">
