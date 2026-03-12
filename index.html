@@ -665,17 +665,19 @@ Inilah keindahan enkapsulasi: pengguna class hanya perlu tahu <em>apa yang bisa 
 </p>
 
 <pre><code>
+// Nama  : PUTRA DHAFIR NASHRULLAH
+// Nim   : 251410009
+// Kelas : SI2A
+
 class Produk {
   String _nama;
   double _harga;
-  
+
   Produk(this._nama, this._harga);
-  
-  // Getter
+
   String get nama => _nama;
   double get harga => _harga;
-  
-  // Setter dengan validasi
+
   set nama(String value) {
     if (value.length >= 3) {
       _nama = value;
@@ -683,7 +685,7 @@ class Produk {
       print('Gagal memperbarui nama: Nama harus memiliki minimal 3 karakter.');
     }
   }
-  
+
   set harga(double value) {
     if (value > 0) {
       _harga = value;
@@ -694,39 +696,24 @@ class Produk {
 }
 
 void main() {
-  // Membuat instance dari class Produk
   var produk1 = Produk('Monitor Samsung', 3500.0);
 
   print('--- Informasi Produk Awal ---');
   print('Nama Produk: ${produk1.nama}');
-  print('Harga Produk: Rp ${produk1.harga.toStringAsFixed(2)}');
+  print('Harga Produk: Rp ${produk1.harga}');
 
-  // Menggunakan setter untuk memperbarui nilai
   print('\n--- Memperbarui Produk ---');
   produk1.nama = 'Keyboard Mekanik';
   produk1.harga = 1200.0;
 
-  print('Nama Produk (setelah update): ${produk1.nama}');
-  print('Harga Produk (setelah update): Rp ${produk1.harga.toStringAsFixed(2)}');
+  print('Nama (setelah update): ${produk1.nama}');
 
-  // Menguji validasi setter
   print('\n--- Menguji Validasi Setter ---');
-  
-  print('Mencoba mengatur nama menjadi "TV"');
-  produk1.nama = 'TV';
-  print('Nama Produk (setelah gagal update nama): ${produk1.nama}');
+  produk1.nama = 'TV'; // Gagal
+  print('Nama tetap: ${produk1.nama}');
 
-  print('Mencoba mengatur harga menjadi -100.0');
-  produk1.harga = -100.0;
-  print('Harga Produk (setelah gagal update harga): Rp ${produk1.harga.toStringAsFixed(2)}');
-
-  print('Mencoba mengatur harga menjadi 0.0');
-  produk1.harga = 0.0;
-  print('Harga Produk (setelah gagal update harga): Rp ${produk1.harga.toStringAsFixed(2)}');
-
-  print('\n--- Status Akhir Produk ---');
-  print('Nama Produk: ${produk1.nama}');
-  print('Harga Produk: Rp ${produk1.harga.toStringAsFixed(2)}');
+  produk1.harga = -100.0; // Gagal
+  print('Harga tetap: Rp ${produk1.harga}');
 }
 </code></pre>
 
