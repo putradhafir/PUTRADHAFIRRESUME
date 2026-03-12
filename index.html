@@ -407,6 +407,8 @@ void main() {
   <button class="run-button" onclick="runDartPad('dartpad1')">Jalankan Kode</button>
   <button class="run-button secondary" onclick="resetDartPad('dartpad1')">Reset</button>
 </div>
+
+<div class="dartpad-wrapper" id="dartpad1">
 <iframe src="https://dartpad.dev/embed-dart.html?id=a1521b9cab68723be2928222c6a87a2e&theme=dark&run=true"></iframe>
 </div>
 
@@ -430,7 +432,7 @@ Dari sudut pandang komputasi, constant constructor memungkinkan <strong>canonica
 // NIM         : 251410009
 // Kelas       : SISTEM INFORMASI SI2A
 
-'dart:convert';
+import 'dart:convert';
 class Mobil {
   String? merk;
   int? tahun;
@@ -904,6 +906,76 @@ void main() {
 
 </div>
 
+<!-- 10 - CLASS USER -->
+<div class="section" id="section10">
+
+<h2>10. CLASS USER </h2>
+
+<p>
+Enkapsulasi adalah prinsip membungkus data dan method dalam satu kesatuan serta menyembunyikan detail internal dari dunia luar. Dalam class Lingkaran ini, kita akan melihat bagaimana properti seperti jari-jari (_jariJari) disembunyikan dan hanya dapat diakses melalui getter dan setter yang telah divalidasi.
+</p>
+
+<p>
+Dengan getter, kita bisa menghitung luas dan keliling lingkaran secara dinamis berdasarkan nilai jari-jari yang tersimpan. Setter memastikan bahwa jari-jari tidak boleh bernilai negatif—menjaga agar objek selalu dalam keadaan valid. Inilah kekuatan enkapsulasi: data terlindungi, perilaku terkendali.
+</p>
+
+<pre><code>
+// Nama        : Putra Dhafir Nashrullah
+// NIM         : 251410009
+// Kelas       : SISTEM INFORMASI SI2A
+
+class User {
+  String _username;
+  String _password;
+  String _email;
+
+  User(this._username, this._password, this._email);
+
+  String get username => _username;
+  String get email => _email;
+
+  bool login(String username, String password) {
+    if (username == _username && password == _password) {
+      print("Login berhasil!");
+      return true;
+    } else {
+      print("Login gagal! Username atau password salah.");
+      return false;
+    }
+  }
+
+  void gantiPassword(String passwordLama, String passwordBaru) {
+    if (passwordLama == _password) {
+      _password = passwordBaru;
+      print("Password berhasil diganti.");
+    } else {
+      print("Password lama salah.");
+    }
+  }
+}
+
+void main() {
+  var user1 = User("admin", "12345", "putra@email.com");
+
+  user1.login("admin", "12345");
+
+  user1.gantiPassword("12345", "67890");
+
+  user1.login("admin", "67890");
+}
+</code></pre>
+
+<div class="button-container">
+  <button class="run-button" onclick="runDartPad('dartpad10')">Jalankan Kode</button>
+  <button class="run-button secondary" onclick="resetDartPad('dartpad10')">Reset</button>
+</div>
+
+<div class="dartpad-wrapper" id="dartpad10">
+<iframe src="https://dartpad.dev/embed-dart.html?id=f4ae78ee9e639d94a90a2fc21e6ea6a7&theme=dark&run=true"></iframe>
+</div>
+
+</div>
+
 <div class="footer">
 <p>© 1447 H / 2026 M - Modul Dart Sesi 3 - PUTRA DHAFIR NASHRULLAH</p>
 <p style="font-size: 0.9rem; margin-top: 10px;">🌙 Marhaban Ya Ramadhan | Mohon Maaf Lahir & Batin 🌙</p>
@@ -1002,5 +1074,3 @@ window.addEventListener('load', function() {
 
 </body>
 </html>
-<div class="button-container">
-  <button class="run-button" onclick="run
