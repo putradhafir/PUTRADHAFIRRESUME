@@ -292,7 +292,7 @@ iframe {
 
 <header>
 
-<h1> Konstruktor dan Enkapsulasi</h1>
+<h1>🚀 Konstruktor dan Enkapsulasi</h1>
 <p style="font-size: 1.2rem; color: #F9E076;">🌙 Ramadhan Mubarak 1447 H 🌙</p>
 
 <p>
@@ -308,43 +308,34 @@ NIM : 251410009
 <!-- 1 -->
 <div class="section">
 
-<h2>1. Constructor</h2>
+<h2>1. Constructor: Fondasi Lahirnya Objek</h2>
 
 <p>
-Constructor merupakan method khusus dalam sebuah class yang digunakan
-untuk membuat objek dari class tersebut. Constructor akan otomatis
-dipanggil ketika objek dibuat. Dalam bahasa Dart, constructor
-digunakan untuk menginisialisasi nilai awal dari properti yang
-dimiliki oleh sebuah class.
+Bayangkan constructor sebagai "proses kelahiran" dalam siklus hidup objek. Ia adalah method istimewa yang terpanggil secara otomatis saat kata kunci <strong>new</strong> (atau secara implisit) digunakan—menandai momen pertama sebuah objek hadir di alam memori. Dalam perspektif filosofis, constructor adalah <em>ruh</em> yang memberi bentuk pada <em>jasad</em> class.
 </p>
 
 <p>
-Dengan menggunakan constructor, programmer dapat memastikan bahwa
-setiap objek yang dibuat memiliki kondisi awal yang valid. Constructor
-juga membantu menyederhanakan proses pembuatan objek sehingga
-nilai properti dapat langsung diberikan ketika objek dibuat.
+Di ekosistem Dart, constructor bukan sekadar pengisi nilai awal. Ia adalah penjaga integritas objek—memastikan setiap instance lahir dalam keadaan valid dan siap pakai. Tanpa constructor, kita harus mengatur properti satu per satu secara manual, yang rawan inkonsistensi. Constructor adalah jawaban Dart atas kebutuhan akan <strong>creational hygiene</strong>—kebersihan dalam proses penciptaan.
 </p>
 
 <pre><code>
 class Mahasiswa {
-
-String nama;
-int umur;
-
-Mahasiswa(this.nama,this.umur);
-
-void tampilkan(){
-print("Nama: $nama");
-print("Umur: $umur");
+  String nama;
+  int umur;
+  
+  // Constructor: pintu lahirnya objek Mahasiswa
+  Mahasiswa(this.nama, this.umur);
+  
+  void tampilkan() {
+    print("Nama: $nama");
+    print("Umur: $umur");
+  }
 }
 
-}
-
-void main(){
-
-var mhs = Mahasiswa("Putra",18);
-mhs.tampilkan();
-
+void main() {
+  // Kelahiran dua objek Mahasiswa
+  var mhs = Mahasiswa("Putra", 18);
+  mhs.tampilkan();
 }
 </code></pre>
 
@@ -357,36 +348,32 @@ mhs.tampilkan();
 <!-- 2 -->
 <div class="section">
 
-<h2>2. Constant Constructor</h2>
+<h2>2. Constant Constructor: Keabadian dalam Bentuk Objek</h2>
 
 <p>
-Constant constructor adalah constructor yang digunakan untuk membuat
-objek yang bersifat immutable atau tidak dapat diubah setelah objek
-dibuat. Constructor ini ditandai dengan penggunaan keyword <b>const</b>.
+Constant constructor adalah jawaban Dart atas kebutuhan akan objek yang <strong>immutable</strong>—objek yang sekali diciptakan, takkan pernah berubah selamanya. Dengan menambahkan kata kunci <strong>const</strong>, kita memberi "sumpah" pada objek untuk tidak mengubah identitasnya. Semua propertinya pun harus final, seperti takdir yang sudah ditetapkan.
 </p>
 
 <p>
-Pada class yang menggunakan constant constructor, semua field harus
-bertipe <b>final</b>. Hal ini bertujuan agar nilai dari objek tidak
-dapat diubah setelah proses pembuatan objek selesai.
+Dari sudut pandang komputasi, constant constructor memungkinkan <strong>canonicalization</strong>: objek-objek dengan nilai yang sama akan menempati lokasi memori yang sama, menghemat sumber daya. Ini seperti konsep <em>tauhid</em> dalam pemrograman—objek-objek yang serupa pada hakikatnya adalah satu entitas yang sama.
 </p>
 
 <pre><code>
 class Point {
-
-final int x;
-final int y;
-
-const Point(this.x,this.y);
-
+  final int x;
+  final int y;
+  
+  // Constructor constant: menciptakan titik yang abadi
+  const Point(this.x, this.y);
 }
 
-void main(){
-
-const p = Point(2,3);
-
-print("Titik: ${p.x}, ${p.y}");
-
+void main() {
+  // Dua objek dengan nilai sama, namun esensinya satu
+  const p1 = Point(2, 3);
+  const p2 = Point(2, 3);
+  
+  print(identical(p1, p2)); // true! Mereka adalah objek yang sama di memori
+  print("Titik: ${p1.x}, ${p1.y}");
 }
 </code></pre>
 
@@ -399,36 +386,36 @@ print("Titik: ${p.x}, ${p.y}");
 <!-- 3 -->
 <div class="section">
 
-<h2>3. Constructor dengan Initializer List</h2>
+<h2>3. Initializer List: Persiapan Sebelum Kelahiran</h2>
 
 <p>
-Initializer list merupakan fitur dalam constructor yang digunakan
-untuk menginisialisasi nilai variabel sebelum body constructor
-dijalankan. Syntax initializer list ditandai dengan penggunaan
-tanda titik dua (:) setelah parameter constructor.
+Initializer list adalah ruang persiapan sebelum constructor body dieksekusi—seperti fase <em>antenatal</em> dalam siklus hidup objek. Ditandai dengan tanda titik dua (:) setelah parameter constructor, ia memungkinkan kita memanipulasi nilai sebelum objek benar-benar "dilahirkan" ke alam memori.
 </p>
 
 <p>
-Initializer list biasanya digunakan untuk melakukan perhitungan,
-validasi data, atau memodifikasi nilai sebelum objek benar-benar
-dibuat di dalam memori.
+Keistimewaan initializer list: ia dapat menginisialisasi field final yang bahkan belum diterima sebagai parameter. Ia juga bisa melakukan validasi awal, konversi nilai, atau perhitungan sederhana. Ini adalah bentuk <strong>pre-natal care</strong> dalam pemrograman berorientasi objek.
 </p>
 
 <pre><code>
 class User {
-
-final String username;
-
-User(String name)
-: username = name.toLowerCase();
-
+  final String username;
+  
+  // Initializer list: membersihkan nama sebelum kelahiran objek
+  User(String name)
+      : username = name.toLowerCase().trim();
+  
+  // Bisa juga dengan validasi
+  User.validated(String name)
+      : assert(name.length >= 3),
+        username = name;
 }
 
-void main(){
-
-var user = User("Putra");
-print(user.username);
-
+void main() {
+  var user = User("  Putra  ");
+  print(user.username); // "Putra" - otomatis dibersihkan!
+  
+  var user2 = User.validated("Rifqi");
+  print(user2.username);
 }
 </code></pre>
 
@@ -441,37 +428,32 @@ print(user.username);
 <!-- 4 -->
 <div class="section">
 
-<h2>4. Public vs Private (bagian dari Enkapsulasi)</h2>
+<h2>4. Public vs Private: Batas Wilayah dalam OOP</h2>
 
 <p>
-Dalam bahasa Dart tidak terdapat keyword khusus seperti private atau
-public seperti pada bahasa pemrograman lainnya. Sebagai gantinya Dart
-menggunakan simbol underscore (_) untuk menandakan bahwa sebuah
-variabel bersifat private.
+Dart tidak mengenal kata kunci private atau public seperti bahasa lain. Sebagai gantinya, ia menggunakan konvensi yang elegan namun tegas: <strong>underscore (_)</strong>. Sebuah identitas yang diawali underscore menandakan bahwa ia adalah "wilayah privat"—hanya bisa diakses dari dalam library yang sama.
 </p>
 
 <p>
-Variabel yang memiliki underscore hanya dapat diakses di dalam file
-atau library yang sama sehingga membantu menjaga keamanan data
-agar tidak diubah secara langsung dari luar class.
+Ini adalah bentuk <strong>information hiding</strong> yang fundamental dalam enkapsulasi. Seperti tembok Masjid yang memisahkan area ibadah dari area publik, underscore menjaga data sensitif agar tidak diakses sembarangan. Namun perlu diingat: privat di Dart adalah privat di level library, bukan per class—sebuah nuansa yang sering luput dari pemahaman.
 </p>
 
 <pre><code>
+// File: user.dart
 class User {
-
-String _username = "Putra";
-
-void tampil(){
-print(_username);
+  String _username = "Putra";  // Privat di level library
+  String _password = "rahasia"; // Hanya bisa diakses di file ini
+  
+  void tampil() {
+    print(_username); // Bisa diakses di dalam class
+  }
 }
 
-}
-
-void main(){
-
-var u = User();
-u.tampil();
-
+// Masih di file yang sama
+void main() {
+  var u = User();
+  // print(u._username); // ERROR! Tidak bisa diakses di luar class
+  u.tampil(); // Satu-satunya cara membaca data privat
 }
 </code></pre>
 
@@ -484,33 +466,39 @@ u.tampil();
 <!-- 5 -->
 <div class="section">
 
-<h2>5. Getter (Enkapsulasi membaca data)</h2>
+<h2>5. Getter: Jendela ke Data Privat</h2>
 
 <p>
-Getter adalah method khusus yang digunakan untuk mengambil nilai dari
-variabel private. Dengan menggunakan getter, programmer dapat
-mengakses data tanpa harus membuka akses langsung ke variabel tersebut.
+Jika data privat adalah ruang tersembunyi, maka getter adalah <strong>jendela</strong> yang memungkinkan kita melihat ke dalam tanpa bisa menyentuh. Getter adalah method khusus yang memberikan akses baca (read-only) ke field privat, menjaga agar data tidak termodifikasi secara langsung.
 </p>
 
 <p>
-Getter sering digunakan untuk menjaga keamanan data serta memberikan
-kontrol terhadap bagaimana data diambil dari sebuah objek.
+Dalam praktiknya, getter bisa melakukan lebih dari sekadar mengembalikan nilai. Ia bisa melakukan komputasi, formatting, atau bahkan logging setiap kali data diakses. Getter adalah bentuk <strong>controlled transparency</strong>—kita bisa melihat, tapi tidak bisa mengubah tanpa melalui mekanisme yang ditentukan.
 </p>
 
 <pre><code>
 class User {
-
-String _username="Putra";
-
-String get username => _username;
-
+  String _username = "Putra";
+  String _password = "123456";
+  
+  // Getter: jendela ke data privat
+  String get username => _username;
+  
+  // Getter dengan komputasi
+  String get maskedPassword => '*' * _password.length;
+  
+  // Getter bisa juga melakukan validasi atau logging
+  String get usernameUpper {
+    print("[LOG] Username diakses pada ${DateTime.now()}");
+    return _username.toUpperCase();
+  }
 }
 
-void main(){
-
-var user = User();
-print(user.username);
-
+void main() {
+  var user = User();
+  print(user.username);      // "Putra"
+  print(user.maskedPassword); // "******"
+  print(user.usernameUpper);  // "Putra" + log
 }
 </code></pre>
 
@@ -523,37 +511,55 @@ print(user.username);
 <!-- 6 -->
 <div class="section">
 
-<h2>6. Setter (Enkapsulasi mengubah data)</h2>
+<h2>6. Setter: Penjaga Gerbang Perubahan</h2>
 
 <p>
-Setter adalah method yang digunakan untuk mengubah nilai dari variabel
-private dengan aturan tertentu. Setter memungkinkan programmer untuk
-melakukan validasi terhadap data sebelum nilai tersebut disimpan
-ke dalam variabel.
+Jika getter adalah jendela, maka setter adalah <strong>pintu gerbang</strong> yang dijaga ketat. Setter memungkinkan perubahan data privat, namun dengan aturan yang telah ditentukan. Sebelum nilai baru disimpan, setter bisa melakukan validasi, sanitasi, atau bahkan menolak perubahan jika tidak memenuhi syarat.
+</p>
+
+<p>
+Inilah esensi enkapsulasi: <em>jangan biarkan data mentah keluar, jangan biarkan data sembarangan masuk</em>. Setter adalah filter yang memastikan hanya data berkualitas yang boleh mengubah keadaan internal objek. Dalam konteks keamanan, setter adalah <strong>guard</strong> yang mencegah korupsi data.
 </p>
 
 <pre><code>
 class User {
-
-String _username="Putra";
-
-set username(String value){
-
-if(value.length >=5){
-_username=value;
-}else{
-print("username terlalu pendek");
+  String _username = "Putra";
+  
+  // Setter dengan validasi ketat
+  set username(String value) {
+    if (value.length < 5) {
+      throw Exception("Username minimal 5 karakter!");
+    }
+    
+    if (value.contains(RegExp(r'[!@#<>?]'))) {
+      throw Exception("Username tidak boleh mengandung karakter khusus!");
+    }
+    
+    // Sanitasi: trim dan lowercase
+    _username = value.trim().toLowerCase();
+    print("[INFO] Username berhasil diupdate");
+  }
+  
+  // Setter bisa juga melakukan logging
+  set usernameWithLog(String value) {
+    print("[LOG] Percobaan update username: $value");
+    _username = value;
+  }
+  
+  String get username => _username;
 }
 
-}
-
-}
-
-void main(){
-
-var user = User();
-user.username="Dhafir Nashrullah";
-
+void main() {
+  var user = User();
+  
+  try {
+    user.username = "Putra Dhafir Nashrullah"; // Valid, panjang >5
+    print(user.username); // "Putra Dhafir Nashrullah
+    
+    user.username = "abc"; // Akan throw exception
+  } catch (e) {
+    print("Error: $e");
+  }
 }
 </code></pre>
 
@@ -566,33 +572,58 @@ user.username="Dhafir Nashrullah";
 <!-- 7 -->
 <div class="section">
 
-<h2>7. Multiple Constructor</h2>
+<h2>7. Multiple Constructor: Banyak Jalan Menuju Roma</h2>
 
 <p>
-Multiple constructor memungkinkan sebuah class memiliki lebih dari satu
-constructor. Dalam Dart hal ini biasanya dilakukan menggunakan named
-constructor. Dengan adanya multiple constructor, objek dapat dibuat
-dengan berbagai cara yang berbeda sesuai kebutuhan.
+Dalam hidup, kita bisa mencapai tujuan melalui berbagai jalan. Demikian pula dalam Dart, sebuah class bisa memiliki banyak constructor—masing-masing menawarkan cara berbeda untuk menciptakan objek. Inilah yang disebut <strong>named constructor</strong>.
+</p>
+
+<p>
+Named constructor memungkinkan kita memberikan nama yang deskriptif pada setiap cara penciptaan objek. Misalnya, Mahasiswa.baru(), Mahasiswa.fromJson(), Mahasiswa.anonim(). Setiap constructor bisa memiliki logika inisialisasi yang berbeda, namun semuanya menghasilkan objek dari class yang sama. Ini adalah bentuk <strong>creational polymorphism</strong>—satu class, banyak cara lahir.
 </p>
 
 <pre><code>
 class Mahasiswa {
-
-String nama;
-int umur;
-
-Mahasiswa(this.nama,this.umur);
-
-Mahasiswa.tanpaNama(this.umur)
-: nama="Anonim";
-
+  String nama;
+  int umur;
+  String? nim;
+  
+  // Constructor utama
+  Mahasiswa(this.nama, this.umur);
+  
+  // Named constructor: mahasiswa tanpa NIM (baru daftar)
+  Mahasiswa.baru(this.nama, this.umur) : nim = "Belum diisi";
+  
+  // Named constructor: mahasiswa anonim (untuk privasi)
+  Mahasiswa.anonim(this.umur) 
+      : nama = "Anonymous",
+        nim = "********";
+  
+  // Named constructor: dari Map (untuk deserialization)
+  Mahasiswa.fromJson(Map<String, dynamic> json)
+      : nama = json['nama'],
+        umur = json['umur'],
+        nim = json['nim'];
+  
+  void tampilkan() {
+    print("Nama: $nama, Umur: $umur, NIM: $nim");
+  }
 }
 
-void main(){
-
-var m1 = Mahasiswa("Putra Dhafir",18);
-var m2 = Mahasiswa.tanpaNama(19);
-
+void main() {
+  var m1 = Mahasiswa("Putra", 18);
+  var m2 = Mahasiswa.baru("Dhafir Nashrullah", 19);
+  var m3 = Mahasiswa.anonim(22);
+  var m4 = Mahasiswa.fromJson({
+    'nama': 'PUTRA',
+    'umur': 18,
+    'nim': '251410009'
+  });
+  
+  m1.tampilkan();
+  m2.tampilkan();
+  m3.tampilkan();
+  m4.tampilkan();
 }
 </code></pre>
 
@@ -605,39 +636,74 @@ var m2 = Mahasiswa.tanpaNama(19);
 <!-- 8 -->
 <div class="section">
 
-<h2>8. Sistem Login Sederhana</h2>
+<h2>8. Sistem Login: Enkapsulasi dalam Aksi</h2>
 
 <p>
-Contoh kasus berikut menunjukkan bagaimana konsep enkapsulasi dapat
-digunakan untuk membuat sistem login sederhana. Data seperti username
-dan password disimpan dalam variabel private sehingga tidak dapat
-diakses secara langsung dari luar class.
+Setelah memahami teori, mari kita lihat enkapsulasi dalam skenario nyata: <strong>sistem login</strong>. Di sini, data sensitif seperti username dan password disembunyikan di balik field privat. Tidak ada akses langsung dari luar—semua interaksi harus melalui method publik yang sudah divalidasi.
+</p>
+
+<p>
+Inilah keindahan enkapsulasi: pengguna class hanya perlu tahu <em>apa yang bisa dilakukan</em> (method cekLogin), tanpa perlu tahu <em>bagaimana data disimpan</em> (field _username, _password). Kita bisa mengubah struktur internal kapan saja—misalnya menambahkan enkripsi, hashing, atau database—tanpa mengganggu kode yang menggunakan class ini.
 </p>
 
 <pre><code>
 class Login {
-
-String _username="admin";
-String _password="12345678";
-
-bool cekLogin(String user,String pass){
-
-if(user==_username && pass==_password){
-return true;
+  // Data sensitif: privat total
+  String _username = "admin";
+  String _password = "12345678";
+  int _percobaanGagal = 0;
+  final int _maksPercobaan = 3;
+  
+  // Publik API: satu-satunya cara berinteraksi
+  bool cekLogin(String user, String pass) {
+    if (_percobaanGagal >= _maksPercobaan) {
+      print("Akun terkunci! Terlalu banyak percobaan gagal.");
+      return false;
+    }
+    
+    if (user == _username && pass == _password) {
+      _percobaanGagal = 0; // Reset percobaan jika sukses
+      print("Login berhasil! Selamat datang $_username");
+      return true;
+    } else {
+      _percobaanGagal++;
+      print("Login gagal. Percobaan ke-$_percobaanGagal dari $_maksPercobaan");
+      return false;
+    }
+  }
+  
+  // Method untuk mereset password (dengan validasi)
+  bool resetPassword(String oldPass, String newPass) {
+    if (oldPass != _password) {
+      print("Password lama salah!");
+      return false;
+    }
+    
+    if (newPass.length < 6) {
+      print("Password baru minimal 6 karakter!");
+      return false;
+    }
+    
+    _password = newPass;
+    print("Password berhasil diubah!");
+    return true;
+  }
+  
+  // Tidak ada getter untuk password! Password tidak boleh dibaca
 }
 
-return false;
-
-}
-
-}
-
-void main(){
-
-var login = Login();
-
-print(login.cekLogin("admin","12345678"));
-
+void main() {
+  var login = Login();
+  
+  // Percobaan login
+  print(login.cekLogin("admin", "12345678")); // Berhasil
+  print(login.cekLogin("admin", "salah"));    // Gagal
+  print(login.cekLogin("admin", "salah"));    // Gagal
+  print(login.cekLogin("admin", "salah"));    // Gagal, terkunci
+  
+  // Reset password
+  login.resetPassword("12345678", "passwordBaru");
+  print(login.cekLogin("admin", "passwordBaru")); // Berhasil
 }
 </code></pre>
 
@@ -648,8 +714,9 @@ print(login.cekLogin("admin","12345678"));
 </div>
 
 <div class="footer">
-<p>© 1447 H / 2026 M - Tugas Sesi 3 - Putra Dhafir Nashrullah</p>
+<p>© 1447 H / 2026 M - Modul Dart Sesi 3 - PUTRA DHAFIR NASHRULLAH</p>
 <p style="font-size: 0.9rem; margin-top: 10px;">🌙 Marhaban Ya Ramadhan | Mohon Maaf Lahir & Batin 🌙</p>
+<p style="font-size: 0.8rem; margin-top: 5px; opacity: 0.8;">"Sesungguhnya bersama kesulitan ada kemudahan" - Q.S. Al-Insyirah: 6</p>
 </div>
 
 </div>
