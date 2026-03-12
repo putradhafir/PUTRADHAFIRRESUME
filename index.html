@@ -1,332 +1,658 @@
-// ============================================================
-// PROGRAM OOP DART - GABUNGAN 8 KONSEP + 1 BONUS
-// ============================================================
-// 🔗 LINK DARTPAD: https://dartpad.dev/?id=29f8a7b3c1e5d9f4a2b6c8e0d3f7a1b4
-// 
-// DIBUAT DARI 8 LINK DARTPAD:
-// 1. Mobil     → https://dartpad.dev/e908a6a83b306bbe2f8b1079e42bfb5c
-// 2. Warna     → https://dartpad.dev/d81fff001b77f587e93eb98a921c298c
-// 3. Titik     → https://dartpad.dev/86f78050833aaa772135ea7d61ed3d7b
-// 4. PersonPrivate → https://dartpad.dev/744995155054ab7621d93ba1d760ac0a
-// 5. PersonGetter → https://dartpad.dev/c9c91aa0b784c3f453bf265fdd79e526
-// 6. PersonSetter → https://dartpad.dev/bca5fcf54c618fba3e62cbb77745b36c
-// 7. Produk    → https://dartpad.dev/d98df96f1c5f946938474951eebe44b1
-// 8. User      → https://dartpad.dev/89ee243f7ce3f56bc39f2c69d5d06e6a
-// ============================================================
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-import 'dart:convert';
+<title>Deep Dive Dart: Constructor & Enkapsulasi - Ramadhan Edition</title>
 
-// ============================================================
-// 1. CLASS MOBIL - Constructor (Default, Named, dari JSON)
-// ============================================================
-class Mobil {
-  String? merk;
-  int? tahun;
+<style>
+:root {
+  --primary: #2D5A27;
+  --primary-light: #4CAF50;
+  --secondary: #C19A6B;
+  --dark: #1A3A1A;
+  --bg: #FDF6E3;
+  --code-bg: #1E2F23;
+  --border: #D4AF37;
+  --text-gold: #B8860B;
+  --moon-glow: #F9E076;
+}
 
-  // Constructor default
-  Mobil(this.merk, this.tahun);
+body {
+  font-family: 'Segoe UI', Tahoma, 'Amiri', serif;
+  background: linear-gradient(135deg, #0B3B0B 0%, #1A4D1A 100%);
+  margin: 0;
+  line-height: 1.8;
+  color: #333;
+  position: relative;
+  min-height: 100vh;
+}
 
-  // Named constructor
-  Mobil.baru() {
-    merk = 'Toyota';
-    tahun = 2023;
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" opacity="0.1"><path d="M25 20 Q 40 10 55 20 Q 70 30 55 40 Q 40 50 25 40 Q 10 30 25 20" fill="%23D4AF37"/><circle cx="75" cy="30" r="8" fill="%23D4AF37"/><circle cx="80" cy="70" r="5" fill="%23D4AF37"/><circle cx="20" cy="80" r="6" fill="%23D4AF37"/></svg>');
+  background-repeat: repeat;
+  background-size: 150px 150px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 40px 20px;
+  position: relative;
+  z-index: 1;
+}
+
+header {
+  background: linear-gradient(135deg, #1A3A1A, #2D5A27);
+  color: #F9E076;
+  padding: 50px;
+  border-radius: 50px 50px 15px 15px;
+  text-align: center;
+  margin-bottom: 40px;
+  border: 2px solid #D4AF37;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 20px #F9E076;
+  position: relative;
+  overflow: hidden;
+}
+
+header::before {
+  content: "🌙 ⭐ 🕌";
+  position: absolute;
+  bottom: 10px;
+  right: 20px;
+  font-size: 2rem;
+  opacity: 0.3;
+  transform: rotate(-5deg);
+}
+
+header::after {
+  content: "";
+  position: absolute;
+  top: -50px;
+  left: -50px;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, #F9E076, transparent 70%);
+  border-radius: 50%;
+  opacity: 0.3;
+}
+
+h1 {
+  font-size: 2.5rem;
+  text-shadow: 2px 2px 4px #1A3A1A;
+  position: relative;
+  display: inline-block;
+}
+
+h1::before, h1::after {
+  content: "🌙";
+  font-size: 2rem;
+  margin: 0 15px;
+  opacity: 0.8;
+}
+
+h1::after {
+  content: "⭐";
+}
+
+.section {
+  background: rgba(253, 246, 227, 0.95);
+  padding: 35px;
+  border-radius: 30px 30px 15px 15px;
+  margin-bottom: 30px;
+  border: 2px solid var(--border);
+  border-top: 8px solid #D4AF37;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+  backdrop-filter: blur(2px);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.section:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.4), 0 0 15px #F9E076;
+}
+
+.section::before {
+  content: "🕌";
+  position: absolute;
+  top: -15px;
+  right: 20px;
+  font-size: 2rem;
+  background: #1A3A1A;
+  padding: 5px 15px;
+  border-radius: 30px;
+  border: 2px solid #D4AF37;
+  color: #F9E076;
+  transform: rotate(5deg);
+}
+
+h2 {
+  color: #2D5A27;
+  border-bottom: 2px dashed #D4AF37;
+  padding-bottom: 10px;
+  font-size: 1.8rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  position: relative;
+  display: inline-block;
+}
+
+h2::after {
+  content: " ⭐";
+  color: #B8860B;
+  font-size: 1.5rem;
+}
+
+pre {
+  background: #1E2F23 !important;
+  color: #F9E076 !important;
+  padding: 20px;
+  border-radius: 20px;
+  overflow-x: auto;
+  border: 2px solid #D4AF37;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+  position: relative;
+}
+
+pre::before {
+  content: "☪️";
+  position: absolute;
+  top: -15px;
+  left: 20px;
+  font-size: 1.5rem;
+  background: #2D5A27;
+  padding: 5px 15px;
+  border-radius: 30px;
+  border: 2px solid #D4AF37;
+}
+
+code {
+  font-family: 'Consolas', monospace;
+}
+
+.dartpad-wrapper {
+  height: 500px;
+  border: 3px solid #D4AF37;
+  border-radius: 20px;
+  overflow: hidden;
+  margin-top: 20px;
+  box-shadow: 0 0 20px #F9E076;
+  position: relative;
+}
+
+.dartpad-wrapper::before {
+  content: "🌙 Selamat Berbuka Puasa 🌙";
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1A3A1A;
+  color: #F9E076;
+  padding: 5px 20px;
+  border-radius: 30px;
+  border: 2px solid #D4AF37;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.footer {
+  text-align: center;
+  margin-top: 50px;
+  color: #F9E076;
+  padding: 20px;
+  background: rgba(26, 58, 26, 0.8);
+  border-radius: 50px 50px 15px 15px;
+  border: 2px solid #D4AF37;
+  font-size: 1.1rem;
+  position: relative;
+}
+
+.footer p {
+  margin: 0;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.footer::before {
+  content: "🌙 ⭐ 🕌 ⭐ 🌙";
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #1A3A1A;
+  color: #F9E076;
+  padding: 5px 20px;
+  border-radius: 30px;
+  border: 2px solid #D4AF37;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+/* Ramadhan Lantern Decoration */
+.container::before {
+  content: "🏮 🏮 🏮";
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  font-size: 2rem;
+  opacity: 0.5;
+  transform: rotate(-10deg);
+}
+
+.container::after {
+  content: "🏮 🏮 🏮";
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 2rem;
+  opacity: 0.5;
+  transform: rotate(10deg);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1::before, h1::after {
+    display: none;
   }
-
-  // Named constructor dari JSON
-  Mobil.dariJson(Map<String, dynamic> json) {
-    merk = json['merk'];
-    tahun = json['tahun'];
+  
+  header {
+    padding: 30px;
   }
-
-  @override
-  String toString() => 'Mobil{merk: $merk, tahun: $tahun}';
-}
-
-// ============================================================
-// 2. CLASS WARNA - Const Constructor
-// ============================================================
-class Warna {
-  final int r, g, b;
-  const Warna(this.r, this.g, this.b);
-
-  @override
-  String toString() => 'Warna(r: $r, g: $g, b: $b)';
-}
-
-// ============================================================
-// 3. CLASS TITIK - Initializer List
-// ============================================================
-class Titik {
-  final double x, y;
-
-  Titik(double x, double y)
-      : x = x.abs(),
-        y = y.abs() {
-    print('📍 Titik dibuat di (${this.x}, ${this.y})');
+  
+  .section {
+    padding: 25px;
+  }
+  
+  .dartpad-wrapper::before {
+    font-size: 0.7rem;
+    white-space: normal;
+    width: 90%;
+    text-align: center;
   }
 }
+</style>
+</head>
+<body>
 
-// ============================================================
-// 4. CLASS PERSON - Private Field
-// ============================================================
-class PersonPrivate {
-  String _name;  // private field
-  int age;
+<div class="container">
 
-  PersonPrivate(this._name, this.age);
+<header>
 
-  // Getter untuk mengakses _name
-  String get name => _name;
+<h1> Konstruktor dan Enkapsulasi</h1>
+<p style="font-size: 1.2rem; color: #F9E076;">🌙 Ramadhan Mubarak 1447 H 🌙</p>
+
+<p>
+Nama : Putra Dhafir Nashrullah <br>
+Kelas : SI2A <br>
+NIM : 251410009
+</p>
+
+<p style="margin-top: 20px; font-style: italic; color: #C19A6B;">"Selamat Menunaikan Ibadah Puasa"</p>
+
+</header>
+
+<!-- 1 -->
+<div class="section">
+
+<h2>1. Constructor</h2>
+
+<p>
+Constructor merupakan method khusus dalam sebuah class yang digunakan
+untuk membuat objek dari class tersebut. Constructor akan otomatis
+dipanggil ketika objek dibuat. Dalam bahasa Dart, constructor
+digunakan untuk menginisialisasi nilai awal dari properti yang
+dimiliki oleh sebuah class.
+</p>
+
+<p>
+Dengan menggunakan constructor, programmer dapat memastikan bahwa
+setiap objek yang dibuat memiliki kondisi awal yang valid. Constructor
+juga membantu menyederhanakan proses pembuatan objek sehingga
+nilai properti dapat langsung diberikan ketika objek dibuat.
+</p>
+
+<pre><code>
+class Mahasiswa {
+
+String nama;
+int umur;
+
+Mahasiswa(this.nama,this.umur);
+
+void tampilkan(){
+print("Nama: $nama");
+print("Umur: $umur");
 }
 
-// ============================================================
-// 5. CLASS PERSON - Getter (Method vs Syntax)
-// ============================================================
-class PersonGetter {
-  String _name;
-  int age;
-
-  PersonGetter(this._name, this.age);
-
-  // Getter method
-  String getName() => _name;
-
-  // Getter syntax
-  String get getName1 => _name;
 }
 
-// ============================================================
-// 6. CLASS PERSON - Setter (Method vs Syntax)
-// ============================================================
-class PersonSetter {
-  String _name;
-  int age;
+void main(){
 
-  PersonSetter(this._name, this.age);
+var mhs = Mahasiswa("Putra",18);
+mhs.tampilkan();
 
-  // Setter method
-  void setName(String name) => _name = name;
+}
+</code></pre>
 
-  // Setter syntax
-  set setName1(String name) => _name = name;
+<div class="dartpad-wrapper">
+<iframe src="https://dartpad.dev/embed-dart.html?id=a1521b9cab68723be2928222c6a87a2e&theme=dark&run=true"></iframe>
+</div>
 
-  // Getter untuk melihat hasil
-  String get getName => _name;
+</div>
+
+<!-- 2 -->
+<div class="section">
+
+<h2>2. Constant Constructor</h2>
+
+<p>
+Constant constructor adalah constructor yang digunakan untuk membuat
+objek yang bersifat immutable atau tidak dapat diubah setelah objek
+dibuat. Constructor ini ditandai dengan penggunaan keyword <b>const</b>.
+</p>
+
+<p>
+Pada class yang menggunakan constant constructor, semua field harus
+bertipe <b>final</b>. Hal ini bertujuan agar nilai dari objek tidak
+dapat diubah setelah proses pembuatan objek selesai.
+</p>
+
+<pre><code>
+class Point {
+
+final int x;
+final int y;
+
+const Point(this.x,this.y);
+
 }
 
-// ============================================================
-// 7. CLASS PRODUK - Validasi dengan Getter & Setter
-// ============================================================
-class Produk {
-  String _nama;
-  double _harga;
+void main(){
 
-  Produk(this._nama, this._harga);
+const p = Point(2,3);
 
-  // Getter
-  String get nama => _nama;
-  double get harga => _harga;
+print("Titik: ${p.x}, ${p.y}");
 
-  // Setter dengan validasi
-  set nama(String value) {
-    if (value.length >= 3) {
-      _nama = value;
-    } else {
-      print('❌ Gagal: Nama produk minimal 3 karakter');
-    }
-  }
-
-  set harga(double value) {
-    if (value > 0) {
-      _harga = value;
-    } else {
-      print('❌ Gagal: Harga harus lebih dari 0');
-    }
-  }
 }
+</code></pre>
 
-// ============================================================
-// 8. CLASS USER - Login & Ganti Password
-// ============================================================
+<div class="dartpad-wrapper">
+<iframe src="https://dartpad.dev/embed-dart.html?id=2b00e1cfd11393809a39dbc7b9c37127&theme=dark&run=true"></iframe>
+</div>
+
+</div>
+
+<!-- 3 -->
+<div class="section">
+
+<h2>3. Constructor dengan Initializer List</h2>
+
+<p>
+Initializer list merupakan fitur dalam constructor yang digunakan
+untuk menginisialisasi nilai variabel sebelum body constructor
+dijalankan. Syntax initializer list ditandai dengan penggunaan
+tanda titik dua (:) setelah parameter constructor.
+</p>
+
+<p>
+Initializer list biasanya digunakan untuk melakukan perhitungan,
+validasi data, atau memodifikasi nilai sebelum objek benar-benar
+dibuat di dalam memori.
+</p>
+
+<pre><code>
 class User {
-  String _username;
-  String _password;
 
-  User(this._username, this._password);
+final String username;
 
-  // Getter
-  String get username => _username;
+User(String name)
+: username = name.toLowerCase();
 
-  // Method login
-  bool login(String username, String password) {
-    return _username == username && _password == password;
-  }
-
-  // Method ganti password dengan validasi
-  void gantiPassword(String lama, String baru) {
-    if (_password == lama) {
-      if (baru.length >= 8) {
-        _password = baru;
-        print('✅ Password berhasil diubah');
-      } else {
-        print('❌ Gagal: Password baru minimal 8 karakter');
-      }
-    } else {
-      print('❌ Gagal: Password lama salah');
-    }
-  }
 }
 
-// ============================================================
-// 9. BONUS: CLASS REKENING BANK - Latihan dari soal
-// ============================================================
-class RekeningBank {
-  String _nomorRekening;
-  double _saldo;
+void main(){
 
-  RekeningBank(this._nomorRekening, [double saldoAwal = 0]) 
-      : _saldo = saldoAwal >= 0 ? saldoAwal : 0;
+var user = User("Putra");
+print(user.username);
 
-  void deposit(double jumlah) {
-    if (jumlah > 0) {
-      _saldo += jumlah;
-      print('✅ Deposit Rp ${jumlah.toStringAsFixed(0)} berhasil');
-    } else {
-      print('❌ Jumlah deposit harus > 0');
-    }
-    cekSaldo();
-  }
+}
+</code></pre>
 
-  void tarik(double jumlah) {
-    if (jumlah > 0) {
-      if (_saldo >= jumlah) {
-        _saldo -= jumlah;
-        print('✅ Penarikan Rp ${jumlah.toStringAsFixed(0)} berhasil');
-      } else {
-        print('❌ Saldo tidak cukup (Rp ${_saldo.toStringAsFixed(0)})');
-      }
-    } else {
-      print('❌ Jumlah penarikan harus > 0');
-    }
-    cekSaldo();
-  }
+<div class="dartpad-wrapper">
+<iframe src="https://dartpad.dev/embed-dart.html?id=b4d1c941c9ce75c2e532e134ab6aa6a2&theme=dark&run=true"></iframe>
+</div>
 
-  void cekSaldo() {
-    print('💰 Saldo: Rp ${_saldo.toStringAsFixed(0)}');
-    print('------------------------');
-  }
+</div>
+
+<!-- 4 -->
+<div class="section">
+
+<h2>4. Public vs Private (bagian dari Enkapsulasi)</h2>
+
+<p>
+Dalam bahasa Dart tidak terdapat keyword khusus seperti private atau
+public seperti pada bahasa pemrograman lainnya. Sebagai gantinya Dart
+menggunakan simbol underscore (_) untuk menandakan bahwa sebuah
+variabel bersifat private.
+</p>
+
+<p>
+Variabel yang memiliki underscore hanya dapat diakses di dalam file
+atau library yang sama sehingga membantu menjaga keamanan data
+agar tidak diubah secara langsung dari luar class.
+</p>
+
+<pre><code>
+class User {
+
+String _username = "Putra";
+
+void tampil(){
+print(_username);
 }
 
-// ============================================================
-// FUNGSI UNTUK MENJALANKAN SEMUA DEMO
-// ============================================================
-void runAllDemos() {
-  print('\n' + '=' * 60);
-  print('📚 PROGRAM OOP DART - GABUNGAN 8 KONSEP + BONUS');
-  print('=' * 60);
-  print('🔗 Original Links:');
-  print('1. https://dartpad.dev/e908a6a83b306bbe2f8b1079e42bfb5c');
-  print('2. https://dartpad.dev/d81fff001b77f587e93eb98a921c298c');
-  print('3. https://dartpad.dev/86f78050833aaa772135ea7d61ed3d7b');
-  print('4. https://dartpad.dev/744995155054ab7621d93ba1d760ac0a');
-  print('5. https://dartpad.dev/c9c91aa0b784c3f453bf265fdd79e526');
-  print('6. https://dartpad.dev/bca5fcf54c618fba3e62cbb77745b36c');
-  print('7. https://dartpad.dev/d98df96f1c5f946938474951eebe44b1');
-  print('8. https://dartpad.dev/89ee243f7ce3f56bc39f2c69d5d06e6a');
-  print('=' * 60);
-
-  // DEMO 1: MOBIL
-  print('\n🔹 DEMO 1: CLASS MOBIL');
-  print('-' * 40);
-  var m1 = Mobil('Honda', 2020);
-  var m2 = Mobil.baru();
-  var m3 = Mobil.dariJson({'merk': 'Suzuki', 'tahun': 2021});
-  print('Default: $m1');
-  print('Named .baru: $m2');
-  print('From JSON: $m3');
-
-  // DEMO 2: WARNA
-  print('\n🔹 DEMO 2: CLASS WARNA');
-  print('-' * 40);
-  const merah = Warna(255, 0, 0);
-  const merahLagi = Warna(255, 0, 0);
-  print('Warna 1: $merah');
-  print('Warna 2: $merahLagi');
-  print('Instance sama? ${identical(merah, merahLagi)}');
-
-  // DEMO 3: TITIK
-  print('\n🔹 DEMO 3: CLASS TITIK');
-  print('-' * 40);
-  var t1 = Titik(3.0, 4.0);
-  var t2 = Titik(-5.0, 10.0);
-  print('Titik 1: (${t1.x}, ${t1.y})');
-  print('Titik 2: (${t2.x}, ${t2.y})');
-
-  // DEMO 4: PERSON PRIVATE
-  print('\n🔹 DEMO 4: CLASS PERSON (PRIVATE FIELD)');
-  print('-' * 40);
-  var p1 = PersonPrivate("Salma", 20);
-  print('Nama: ${p1.name} (via getter)');
-  print('Usia: ${p1.age}');
-
-  // DEMO 5: PERSON GETTER
-  print('\n🔹 DEMO 5: CLASS PERSON (GETTER)');
-  print('-' * 40);
-  var p2 = PersonGetter("Salma", 20);
-  print('Via method: ${p2.getName()}');
-  print('Via syntax: ${p2.getName1}');
-
-  // DEMO 6: PERSON SETTER
-  print('\n🔹 DEMO 6: CLASS PERSON (SETTER)');
-  print('-' * 40);
-  var p3 = PersonSetter("Salma", 20);
-  print('Awal: ${p3.getName}');
-  p3.setName('Aqila');
-  print('Via method: ${p3.getName}');
-  p3.setName1 = 'Nabila';
-  print('Via syntax: ${p3.getName}');
-
-  // DEMO 7: PRODUK
-  print('\n🔹 DEMO 7: CLASS PRODUK');
-  print('-' * 40);
-  var produk = Produk('Monitor Samsung', 3500.0);
-  print('Awal: ${produk.nama} - Rp${produk.harga}');
-  produk.nama = 'Keyboard Mekanik';
-  produk.harga = 1200.0;
-  print('Update valid: ${produk.nama} - Rp${produk.harga}');
-  print('\nMencoba update invalid:');
-  produk.nama = 'TV';  // < 3 karakter
-  produk.harga = -100.0;  // < 0
-  print('Hasil akhir: ${produk.nama} - Rp${produk.harga}');
-
-  // DEMO 8: USER
-  print('\n🔹 DEMO 8: CLASS USER');
-  print('-' * 40);
-  var user = User('admin_user', 'securePass123');
-  print('Username: ${user.username}');
-  print('Login sukses: ${user.login('admin_user', 'securePass123')}');
-  print('Login gagal: ${user.login('admin_user', 'wrongPass')}');
-  user.gantiPassword('securePass123', 'newPass456');
-  print('Login dgn password baru: ${user.login('admin_user', 'newPass456')}');
-
-  // DEMO 9: BONUS REKENING BANK
-  print('\n🔹 DEMO 9: BONUS - REKENING BANK');
-  print('-' * 40);
-  var bank = RekeningBank('123-456-789', 500000);
-  print('Saldo awal:');
-  bank.cekSaldo();
-  bank.deposit(200000);
-  bank.tarik(100000);
-  bank.tarik(700000);  // Gagal
-
-  print('\n' + '=' * 60);
-  print('✅ SEMUA DEMO SELESAI');
-  print('=' * 60);
 }
 
-// ============================================================
-// MAIN FUNCTION
-// ============================================================
-void main() {
-  runAllDemos();
+void main(){
+
+var u = User();
+u.tampil();
+
 }
+</code></pre>
+
+<div class="dartpad-wrapper">
+<iframe src="https://dartpad.dev/embed-dart.html?id=01b7cbdab9d00799ba22a9a794e8b466&theme=dark&run=true"></iframe>
+</div>
+
+</div>
+
+<!-- 5 -->
+<div class="section">
+
+<h2>5. Getter (Enkapsulasi membaca data)</h2>
+
+<p>
+Getter adalah method khusus yang digunakan untuk mengambil nilai dari
+variabel private. Dengan menggunakan getter, programmer dapat
+mengakses data tanpa harus membuka akses langsung ke variabel tersebut.
+</p>
+
+<p>
+Getter sering digunakan untuk menjaga keamanan data serta memberikan
+kontrol terhadap bagaimana data diambil dari sebuah objek.
+</p>
+
+<pre><code>
+class User {
+
+String _username="Putra";
+
+String get username => _username;
+
+}
+
+void main(){
+
+var user = User();
+print(user.username);
+
+}
+</code></pre>
+
+<div class="dartpad-wrapper">
+<iframe src="https://dartpad.dev/embed-dart.html?id=d0625747705335030a00b1759ed72bbf&theme=dark&run=true"></iframe>
+</div>
+
+</div>
+
+<!-- 6 -->
+<div class="section">
+
+<h2>6. Setter (Enkapsulasi mengubah data)</h2>
+
+<p>
+Setter adalah method yang digunakan untuk mengubah nilai dari variabel
+private dengan aturan tertentu. Setter memungkinkan programmer untuk
+melakukan validasi terhadap data sebelum nilai tersebut disimpan
+ke dalam variabel.
+</p>
+
+<pre><code>
+class User {
+
+String _username="Putra";
+
+set username(String value){
+
+if(value.length >=5){
+_username=value;
+}else{
+print("username terlalu pendek");
+}
+
+}
+
+}
+
+void main(){
+
+var user = User();
+user.username="Dhafir Nashrullah";
+
+}
+</code></pre>
+
+<div class="dartpad-wrapper">
+<iframe src="https://dartpad.dev/embed-dart.html?id=65e505fda2366d7976c8febedc04d735&theme=dark&run=true"></iframe>
+</div>
+
+</div>
+
+<!-- 7 -->
+<div class="section">
+
+<h2>7. Multiple Constructor</h2>
+
+<p>
+Multiple constructor memungkinkan sebuah class memiliki lebih dari satu
+constructor. Dalam Dart hal ini biasanya dilakukan menggunakan named
+constructor. Dengan adanya multiple constructor, objek dapat dibuat
+dengan berbagai cara yang berbeda sesuai kebutuhan.
+</p>
+
+<pre><code>
+class Mahasiswa {
+
+String nama;
+int umur;
+
+Mahasiswa(this.nama,this.umur);
+
+Mahasiswa.tanpaNama(this.umur)
+: nama="Anonim";
+
+}
+
+void main(){
+
+var m1 = Mahasiswa("Putra Dhafir",18);
+var m2 = Mahasiswa.tanpaNama(19);
+
+}
+</code></pre>
+
+<div class="dartpad-wrapper">
+<iframe src="https://dartpad.dev/embed-dart.html?id=38354bf002efbd3810a109b145c9b618&theme=dark&run=true"></iframe>
+</div>
+
+</div>
+
+<!-- 8 -->
+<div class="section">
+
+<h2>8. Sistem Login Sederhana</h2>
+
+<p>
+Contoh kasus berikut menunjukkan bagaimana konsep enkapsulasi dapat
+digunakan untuk membuat sistem login sederhana. Data seperti username
+dan password disimpan dalam variabel private sehingga tidak dapat
+diakses secara langsung dari luar class.
+</p>
+
+<pre><code>
+class Login {
+
+String _username="admin";
+String _password="12345678";
+
+bool cekLogin(String user,String pass){
+
+if(user==_username && pass==_password){
+return true;
+}
+
+return false;
+
+}
+
+}
+
+void main(){
+
+var login = Login();
+
+print(login.cekLogin("admin","12345678"));
+
+}
+</code></pre>
+
+<div class="dartpad-wrapper">
+<iframe src="https://dartpad.dev/embed-dart.html?id=62756cf2f15914c3954fda529d7effe2&theme=dark&run=true"></iframe>
+</div>
+
+</div>
+
+<div class="footer">
+<p>© 1447 H / 2026 M - Tugas Sesi 3 - Putra Dhafir Nashrullah</p>
+<p style="font-size: 0.9rem; margin-top: 10px;">🌙 Marhaban Ya Ramadhan | Mohon Maaf Lahir & Batin 🌙</p>
+</div>
+
+</div>
+
+</body>
+</html>
