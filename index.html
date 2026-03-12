@@ -308,7 +308,7 @@ NIM : 251410009
 <!-- 1 -->
 <div class="section">
 
-<h2>1. Constructor: Fondasi Lahirnya Objek</h2>
+<h2>1. CLASS BUKU </h2>
 
 <p>
 Bayangkan constructor sebagai "proses kelahiran" dalam siklus hidup objek. Ia adalah method istimewa yang terpanggil secara otomatis saat kata kunci <strong>new</strong> (atau secara implisit) digunakan—menandai momen pertama sebuah objek hadir di alam memori. Dalam perspektif filosofis, constructor adalah <em>ruh</em> yang memberi bentuk pada <em>jasad</em> class.
@@ -319,23 +319,20 @@ Di ekosistem Dart, constructor bukan sekadar pengisi nilai awal. Ia adalah penja
 </p>
 
 <pre><code>
-class Mahasiswa {
-  String nama;
-  int umur;
-  
-  // Constructor: pintu lahirnya objek Mahasiswa
-  Mahasiswa(this.nama, this.umur);
-  
-  void tampilkan() {
-    print("Nama: $nama");
-    print("Umur: $umur");
-  }
+// Nama        : Putra Dhafir Nashrullah
+// NIM         : 251410009
+// Kelas       : SISTEM INFORMASI SI2A
+
+class Buku{
+  String judul;
+  Buku(this.judul);
 }
 
 void main() {
-  // Kelahiran dua objek Mahasiswa
-  var mhs = Mahasiswa("Putra", 18);
-  mhs.tampilkan();
+  // Membuat objek dari kelas Buku
+  Buku buku1 = Buku("Pemrograman Dart untuk Pemula");
+  // Menampilkan judul buku
+  print("Judul Buku: ${buku1.judul}");
 }
 </code></pre>
 
@@ -348,7 +345,7 @@ void main() {
 <!-- 2 -->
 <div class="section">
 
-<h2>2. Constant Constructor: Keabadian dalam Bentuk Objek</h2>
+<h2>2. CLASS MOBIL </h2>
 
 <p>
 Constant constructor adalah jawaban Dart atas kebutuhan akan objek yang <strong>immutable</strong>—objek yang sekali diciptakan, takkan pernah berubah selamanya. Dengan menambahkan kata kunci <strong>const</strong>, kita memberi "sumpah" pada objek untuk tidak mengubah identitasnya. Semua propertinya pun harus final, seperti takdir yang sudah ditetapkan.
@@ -359,21 +356,50 @@ Dari sudut pandang komputasi, constant constructor memungkinkan <strong>canonica
 </p>
 
 <pre><code>
-class Point {
-  final int x;
-  final int y;
+// Nama        : Putra Dhafir Nashrullah
+// NIM         : 251410009
+// Kelas       : SISTEM INFORMASI SI2A
+
+import 'dart:convert';
+class Mobil {
+  String? merk;
+  int? tahun;
+
+  // Parameterized Constructor
+  Mobil(this.merk, this.tahun);
   
-  // Constructor constant: menciptakan titik yang abadi
-  const Point(this.x, this.y);
+  // Named Constructor
+  Mobil.baru() {
+    merk = 'ayla';
+    tahun = 2025;
+  }
+
+  // Named Constructor dariJson
+  Mobil.dariJson(Map<String, dynamic> json) {
+    merk = json['merk'];
+    tahun = json['tahun'];
+  }
+
+  @override
+  String toString() {
+    return 'Mobil{merk: $merk, tahun: $tahun}';
+  }
 }
 
+// Fungsi main() wajib ada untuk menjalankan program
 void main() {
-  // Dua objek dengan nilai sama, namun esensinya satu
-  const p1 = Point(2, 3);
-  const p2 = Point(2, 3);
-  
-  print(identical(p1, p2)); // true! Mereka adalah objek yang sama di memori
-  print("Titik: ${p1.x}, ${p1.y}");
+  // Membuat objek dengan Parameterized Constructor
+  Mobil mobil1 = Mobil('toyota', 2024);
+  print('Mobil 1: $mobil1');
+
+  // Membuat objek dengan Named Constructor baru()
+  Mobil mobil2 = Mobil.baru();
+  print('Mobil 2: $mobil2');
+
+  // Membuat objek dengan Named Constructor dariJson()
+  Map<String, dynamic> dataMobil = {'merk': 'honda', 'tahun': 2021};
+  Mobil mobil3 = Mobil.dariJson(dataMobil);
+  print('Mobil 3: $mobil3');
 }
 </code></pre>
 
@@ -397,25 +423,25 @@ Keistimewaan initializer list: ia dapat menginisialisasi field final yang bahkan
 </p>
 
 <pre><code>
-class User {
-  final String username;
-  
-  // Initializer list: membersihkan nama sebelum kelahiran objek
-  User(String name)
-      : username = name.toLowerCase().trim();
-  
-  // Bisa juga dengan validasi
-  User.validated(String name)
-      : assert(name.length >= 3),
-        username = name;
+class Warna {
+  final int r, g, b;
+  const Warna(this.r, this.g, this.b);
+
+  @override
+  String toString() {
+    return 'Warna(r: $r, g: $g, b: $b)';
+  }
 }
 
 void main() {
-  var user = User("  Putra  ");
-  print(user.username); // "Putra" - otomatis dibersihkan!
+  const merah = Warna(255, 0, 0);
+  const merahLagi = Warna(255, 0, 0); // Menggunakan instance yang sama di memory
+
+  print(merah);
+  print(merahLagi);
   
-  var user2 = User.validated("Putra");
-  print(user2.username);
+  // Membuktikan bahwa instance-nya sama (canonicalized)
+  print(identical(merah, merahLagi)); // true
 }
 </code></pre>
 
@@ -439,21 +465,29 @@ Ini adalah bentuk <strong>information hiding</strong> yang fundamental dalam enk
 </p>
 
 <pre><code>
-// File: user.dart
-class User {
-  String _username = "Putra";  // Privat di level library
-  String _password = "rahasia"; // Hanya bisa diakses di file ini
-  
-  void tampil() {
-    print(_username); // Bisa diakses di dalam class
+class Titik {
+  final double x, y;
+
+  Titik(double x, double y)
+    : x = x.abs(),
+      y = y.abs() {
+    print('Titik dibuat di (${this.x}, ${this.y})');
   }
 }
 
-// Masih di file yang sama
-void main() {
-  var u = User();
-  // print(u._username); // ERROR! Tidak bisa diakses di luar class
-  u.tampil(); // Satu-satunya cara membaca data privat
+void main(){
+  // Contoh penggunaan class Titik
+  print('Membuat objek Titik pertama:');
+  var titik1 = Titik(3.0, 4.0);
+  print('Titik 1: x = ${titik1.x}, y = ${titik1.y}');
+
+  print('\nMembuat objek Titik kedua dengan nilai negatif:');
+  var titik2 = Titik(-5.0, 10.0);
+  print('Titik 2: x = ${titik2.x}, y = ${titik2.y}');
+
+  print('\nMembuat objek Titik ketiga dengan nilai negatif di kedua koordinat:');
+  var titik3 = Titik(-1.5, -2.5);
+  print('Titik 3: x = ${titik3.x}, y = ${titik3.y}');
 }
 </code></pre>
 
@@ -477,28 +511,47 @@ Dalam praktiknya, getter bisa melakukan lebih dari sekadar mengembalikan nilai. 
 </p>
 
 <pre><code>
-class User {
-  String _username = "Putra";
-  String _password = "123456";
+class Mahasiswa {
+  String nama;
+  int umur;
+  String? nim;
   
-  // Getter: jendela ke data privat
-  String get username => _username;
+  // Constructor utama
+  Mahasiswa(this.nama, this.umur);
   
-  // Getter dengan komputasi
-  String get maskedPassword => '*' * _password.length;
+  // Named constructor: mahasiswa tanpa NIM (baru daftar)
+  Mahasiswa.baru(this.nama, this.umur) : nim = "Belum diisi";
   
-  // Getter bisa juga melakukan validasi atau logging
-  String get usernameUpper {
-    print("[LOG] Username diakses pada ${DateTime.now()}");
-    return _username.toUpperCase();
+  // Named constructor: mahasiswa anonim (untuk privasi)
+  Mahasiswa.anonim(this.umur) 
+      : nama = "Anonymous",
+        nim = "****";
+  
+  // Named constructor: dari Map (untuk deserialization)
+  Mahasiswa.fromJson(Map<String, dynamic> json)
+      : nama = json['nama'],
+        umur = json['umur'],
+        nim = json['nim'];
+  
+  void tampilkan() {
+    print("Nama: $nama, Umur: $umur, NIM: $nim");
   }
 }
 
 void main() {
-  var user = User();
-  print(user.username);      // "Putra"
-  print(user.maskedPassword); // "******"
-  print(user.usernameUpper);  // "Putra" + log
+  var m1 = Mahasiswa("PUTRA", 18);
+  var m2 = Mahasiswa.baru("Budi", 19);
+  var m3 = Mahasiswa.anonim(22);
+  var m4 = Mahasiswa.fromJson({
+    'nama': 'PUTRA',
+    'umur': 18,
+    'nim': '251410009'
+  });
+  
+  m1.tampilkan();
+  m2.tampilkan();
+  m3.tampilkan();
+  m4.tampilkan();
 }
 </code></pre>
 
@@ -522,44 +575,16 @@ Inilah esensi enkapsulasi: <em>jangan biarkan data mentah keluar, jangan biarkan
 </p>
 
 <pre><code>
-class User {
-  String _username = "Putra";
-  
-  // Setter dengan validasi ketat
-  set username(String value) {
-    if (value.length < 5) {
-      throw Exception("Username minimal 5 karakter!");
-    }
-    
-    if (value.contains(RegExp(r'[!@#<>?]'))) {
-      throw Exception("Username tidak boleh mengandung karakter khusus!");
-    }
-    
-    // Sanitasi: trim dan lowercase
-    _username = value.trim().toLowerCase();
-    print("[INFO] Username berhasil diupdate");
-  }
-  
-  // Setter bisa juga melakukan logging
-  set usernameWithLog(String value) {
-    print("[LOG] Percobaan update username: $value");
-    _username = value;
-  }
-  
-  String get username => _username;
+class Person {
+  String _name;
+  int age;
+  Person(this._name, this.age);
 }
 
 void main() {
-  var user = User();
-  
-  try {
-    user.username = "Putra Dhafir Nashrullah"; // Valid, panjang >5
-    print(user.username); // "Putra Dhafir Nashrullah
-    
-    user.username = "abc"; // Akan throw exception
-  } catch (e) {
-    print("Error: $e");
-  }
+  Person person = Person("PUTRA", 18);
+  print(person.age);
+  // print(person._name); // error karena private
 }
 </code></pre>
 
@@ -583,47 +608,40 @@ Named constructor memungkinkan kita memberikan nama yang deskriptif pada setiap 
 </p>
 
 <pre><code>
-class Mahasiswa {
-  String nama;
-  int umur;
-  String? nim;
-  
-  // Constructor utama
-  Mahasiswa(this.nama, this.umur);
-  
-  // Named constructor: mahasiswa tanpa NIM (baru daftar)
-  Mahasiswa.baru(this.nama, this.umur) : nim = "Belum diisi";
-  
-  // Named constructor: mahasiswa anonim (untuk privasi)
-  Mahasiswa.anonim(this.umur) 
-      : nama = "Anonymous",
-        nim = "********";
-  
-  // Named constructor: dari Map (untuk deserialization)
-  Mahasiswa.fromJson(Map<String, dynamic> json)
-      : nama = json['nama'],
-        umur = json['umur'],
-        nim = json['nim'];
-  
-  void tampilkan() {
-    print("Nama: $nama, Umur: $umur, NIM: $nim");
-  }
+// Nama        : Putra Dhafir Nashrullah
+// NIM         : 251410009
+// Kelas       : SISTEM INFORMASI SI2A
+
+class Person{
+  String?_name;
+  int?age;
+
+  Person(this._name,this.age);
+
+  // Getter (konsistenkan nama untuk kemudahan pemakaian)
+  String?get nama => _name;
+  String?getName() => _name;
+
+  // Setter (konsistenkan nama)
+  set nama(String?value) => _name = value;
+  void setName(String?value) => _name = value;
 }
 
+// Tambahkan fungsi main() untuk menjalankan program
 void main() {
-  var m1 = Mahasiswa("Putra", 18);
-  var m2 = Mahasiswa.baru("Dhafir Nashrullah", 19);
-  var m3 = Mahasiswa.anonim(22);
-  var m4 = Mahasiswa.fromJson({
-    'nama': 'PUTRA',
-    'umur': 18,
-    'nim': '251410009'
-  });
+  // Membuat objek Person
+  Person orang = Person(");
   
-  m1.tampilkan();
-  m2.tampilkan();
-  m3.tampilkan();
-  m4.tampilkan();
+  // Menggunakan getter
+  print("Nama awal: ${orang.nama}");
+  print("Nama via getName(): ${orang.getName()}");
+  
+  // Menggunakan setter
+  orang.nama = "";
+  print("Nama setelah diubah: ${orang.nama}");
+  
+  orang.setName(".");
+  print("Nama via setName(): ${orang.getName()}");
 }
 </code></pre>
 
@@ -647,63 +665,68 @@ Inilah keindahan enkapsulasi: pengguna class hanya perlu tahu <em>apa yang bisa 
 </p>
 
 <pre><code>
-class Login {
-  // Data sensitif: privat total
-  String _username = "admin";
-  String _password = "12345678";
-  int _percobaanGagal = 0;
-  final int _maksPercobaan = 3;
+class Produk {
+  String _nama;
+  double _harga;
   
-  // Publik API: satu-satunya cara berinteraksi
-  bool cekLogin(String user, String pass) {
-    if (_percobaanGagal >= _maksPercobaan) {
-      print("Akun terkunci! Terlalu banyak percobaan gagal.");
-      return false;
-    }
-    
-    if (user == _username && pass == _password) {
-      _percobaanGagal = 0; // Reset percobaan jika sukses
-      print("Login berhasil! Selamat datang $_username");
-      return true;
+  Produk(this._nama, this._harga);
+  
+  // Getter
+  String get nama => _nama;
+  double get harga => _harga;
+  
+  // Setter dengan validasi
+  set nama(String value) {
+    if (value.length >= 3) {
+      _nama = value;
     } else {
-      _percobaanGagal++;
-      print("Login gagal. Percobaan ke-$_percobaanGagal dari $_maksPercobaan");
-      return false;
+      print('Gagal memperbarui nama: Nama harus memiliki minimal 3 karakter.');
     }
   }
   
-  // Method untuk mereset password (dengan validasi)
-  bool resetPassword(String oldPass, String newPass) {
-    if (oldPass != _password) {
-      print("Password lama salah!");
-      return false;
+  set harga(double value) {
+    if (value > 0) {
+      _harga = value;
+    } else {
+      print('Gagal memperbarui harga: Harga harus lebih besar dari 0.');
     }
-    
-    if (newPass.length < 6) {
-      print("Password baru minimal 6 karakter!");
-      return false;
-    }
-    
-    _password = newPass;
-    print("Password berhasil diubah!");
-    return true;
   }
-  
-  // Tidak ada getter untuk password! Password tidak boleh dibaca
 }
 
 void main() {
-  var login = Login();
+  // Membuat instance dari class Produk
+  var produk1 = Produk('Monitor Samsung', 3500.0);
+
+  print('--- Informasi Produk Awal ---');
+  print('Nama Produk: ${produk1.nama}');
+  print('Harga Produk: Rp ${produk1.harga.toStringAsFixed(2)}');
+
+  // Menggunakan setter untuk memperbarui nilai
+  print('\n--- Memperbarui Produk ---');
+  produk1.nama = 'Keyboard Mekanik';
+  produk1.harga = 1200.0;
+
+  print('Nama Produk (setelah update): ${produk1.nama}');
+  print('Harga Produk (setelah update): Rp ${produk1.harga.toStringAsFixed(2)}');
+
+  // Menguji validasi setter
+  print('\n--- Menguji Validasi Setter ---');
   
-  // Percobaan login
-  print(login.cekLogin("admin", "12345678")); // Berhasil
-  print(login.cekLogin("admin", "salah"));    // Gagal
-  print(login.cekLogin("admin", "salah"));    // Gagal
-  print(login.cekLogin("admin", "salah"));    // Gagal, terkunci
-  
-  // Reset password
-  login.resetPassword("12345678", "passwordBaru");
-  print(login.cekLogin("admin", "passwordBaru")); // Berhasil
+  print('Mencoba mengatur nama menjadi "TV"');
+  produk1.nama = 'TV';
+  print('Nama Produk (setelah gagal update nama): ${produk1.nama}');
+
+  print('Mencoba mengatur harga menjadi -100.0');
+  produk1.harga = -100.0;
+  print('Harga Produk (setelah gagal update harga): Rp ${produk1.harga.toStringAsFixed(2)}');
+
+  print('Mencoba mengatur harga menjadi 0.0');
+  produk1.harga = 0.0;
+  print('Harga Produk (setelah gagal update harga): Rp ${produk1.harga.toStringAsFixed(2)}');
+
+  print('\n--- Status Akhir Produk ---');
+  print('Nama Produk: ${produk1.nama}');
+  print('Harga Produk: Rp ${produk1.harga.toStringAsFixed(2)}');
 }
 </code></pre>
 
