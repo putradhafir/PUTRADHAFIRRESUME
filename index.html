@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Deep Dive Dart: Constructor & Enkapsulasi - Ramadhan Edition</title>
+    <title>Deep Dive Dart: Constructor & Enkapsulasi TUGAS 3 - Ramadhan Edition</title>
 
     <style>
         :root {
@@ -411,7 +411,7 @@
                 Di ekosistem Dart, constructor bukan sekadar pengisi nilai awal. Ia adalah penjaga integritas
                 objek—memastikan setiap instance lahir dalam keadaan valid dan siap pakai. Tanpa constructor, kita harus
                 mengatur properti satu per satu secara manual, yang rawan inkonsistensi. Constructor adalah jawaban Dart
-                atas kebutuhan akan <strong>creational hygiene</strong>—kebersihan dalam proses penciptaan.
+                atas kebutuhan akan creational hygiene kebersihan dalam proses penciptaan.
             </p>
 
             <pre><code>
@@ -437,7 +437,7 @@ void main() {
                     onclick="openModal('https://dartpad.dev/embed-dart.html?id=a1521b9cab68723be2928222c6a87a2e&theme=dark&run=true')">Jalankan
                     Kode</button>
             </div>
-  <!-- JENIS CONSTRUCTOR -->
+  <!-- *JENIS CONSTRUCTOR* -->
         <div class="card">
             <div class="section-title"> Jenis-jenis Constructor</div>
             <ol style="margin-left: 25px; font-weight: 500;">
@@ -455,16 +455,16 @@ void main() {
             <h2>2. CLASS MOBIL </h2>
 
             <p>
-                Constant constructor adalah jawaban Dart atas kebutuhan akan objek yang <strong>immutable</strong>—objek
+                Constant constructor adalah jawaban Dart atas kebutuhan akan objek yang immutable — objek
                 yang sekali diciptakan, takkan pernah berubah selamanya. Dengan menambahkan kata kunci
-                <strong>const</strong>, kita memberi "sumpah" pada objek untuk tidak mengubah identitasnya. Semua
+                const, kita memberi "sumpah" pada objek untuk tidak mengubah identitasnya. Semua
                 propertinya pun harus final, seperti takdir yang sudah ditetapkan.
             </p>
 
             <p>
-                Dari sudut pandang komputasi, constant constructor memungkinkan <strong>canonicalization</strong>:
+                Dari sudut pandang komputasi, constant constructor memungkinkan canonicalization
                 objek-objek dengan nilai yang sama akan menempati lokasi memori yang sama, menghemat sumber daya. Ini
-                seperti konsep <em>tauhid</em> dalam pemrograman—objek-objek yang serupa pada hakikatnya adalah satu
+                seperti konsep dalam pemrograman—objek-objek yang serupa pada hakikatnya adalah satu
                 entitas yang sama.
             </p>
 
@@ -574,7 +574,7 @@ void main() {
 
             <p>
             Initializer list adalah ruang persiapan sebelum constructor body dieksekusi—seperti fase
-            <em>antenatal</em> dalam siklus hidup objek. Ditandai dengan tanda titik dua (:) setelah parameter
+            emantenatal dalam siklus hidup objek. Ditandai dengan tanda titik dua (:) setelah parameter
             constructor, ia memungkinkan kita memanipulasi nilai sebelum objek benar-benar "dilahirkan" ke alam
             memori.
             </p>
