@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="id">
 
 <head>
@@ -398,11 +398,13 @@
 
             <h2>1. CLASS BUKU </h2>
 
-            <p>
-                Bayangkan constructor sebagai "proses kelahiran" dalam siklus hidup objek. Ia adalah method istimewa
-                yang terpanggil secara otomatis saat kata kunci <strong>new</strong> (atau secara implisit)
-                digunakan—menandai momen pertama sebuah objek hadir di alam memori. Dalam perspektif filosofis,
-                constructor adalah <em>ruh</em> yang memberi bentuk pada <em>jasad</em> class.
+            </p>
+            Named Constructor adalah jenis constructor dalam pemrograman 
+            Dart yang memiliki 
+            Nama tambahan 
+            selain nama class. 
+            Tujuannya adalah untuk membuat lebih
+            dari satu cara membuat objek dari sebuah class
             </p>
 
             <p>
@@ -435,7 +437,16 @@ void main() {
                     onclick="openModal('https://dartpad.dev/embed-dart.html?id=a1521b9cab68723be2928222c6a87a2e&theme=dark&run=true')">Jalankan
                     Kode</button>
             </div>
-
+  <!-- JENIS CONSTRUCTOR -->
+        <div class="card">
+            <div class="section-title"> Jenis-jenis Constructor</div>
+            <ol style="margin-left: 25px; font-weight: 500;">
+                <li>Default Constructor: ClassName()</li>
+                <li>Named Constructor: ClassName.name()</li>
+                <li>Parameterized Constructor: ClassName(this.param)</li>
+                <li>Constant Constructor: const ClassName()</li>
+                <li>Factory Constructor (lanjut)</li>
+            </ol>
         </div>
 
         <!-- 2 -->
@@ -517,18 +528,9 @@ void main() {
         <div class="section" id="section3">
 
             <h2>3. CLASS WARNA </h2>
-
+            
             <p>
-                Initializer list adalah ruang persiapan sebelum constructor body dieksekusi—seperti fase
-                <em>antenatal</em> dalam siklus hidup objek. Ditandai dengan tanda titik dua (:) setelah parameter
-                constructor, ia memungkinkan kita memanipulasi nilai sebelum objek benar-benar "dilahirkan" ke alam
-                memori.
-            </p>
-
-            <p>
-                Keistimewaan initializer list: ia dapat menginisialisasi field final yang bahkan belum diterima sebagai
-                parameter. Ia juga bisa melakukan validasi awal, konversi nilai, atau perhitungan sederhana. Ini adalah
-                bentuk <strong>pre-natal care</strong> dalam pemrograman berorientasi objek.
+            Objek const dengan nilai berbeda akan berbeda instance.
             </p>
 
             <pre><code>
@@ -571,18 +573,12 @@ void main() {
             <h2>4. CLASS TITIK </h2>
 
             <p>
-                Dart tidak mengenal kata kunci private atau public seperti bahasa lain. Sebagai gantinya, ia menggunakan
-                konvensi yang elegan namun tegas: <strong>underscore (_)</strong>. Sebuah identitas yang diawali
-                underscore menandakan bahwa ia adalah "wilayah privat"—hanya bisa diakses dari dalam library yang sama.
+            Initializer list adalah ruang persiapan sebelum constructor body dieksekusi—seperti fase
+            <em>antenatal</em> dalam siklus hidup objek. Ditandai dengan tanda titik dua (:) setelah parameter
+            constructor, ia memungkinkan kita memanipulasi nilai sebelum objek benar-benar "dilahirkan" ke alam
+            memori.
             </p>
-
-            <p>
-                Ini adalah bentuk <strong>information hiding</strong> yang fundamental dalam enkapsulasi. Seperti tembok
-                Masjid yang memisahkan area ibadah dari area publik, underscore menjaga data sensitif agar tidak diakses
-                sembarangan. Namun perlu diingat: privat di Dart adalah privat di level library, bukan per class—sebuah
-                nuansa yang sering luput dari pemahaman.
-            </p>
-
+            
             <pre><code>
 // Nama        : Putra Dhafir Nashrullah
 // NIM         : 251410009
@@ -625,20 +621,7 @@ void main(){
         <div class="section" id="section5">
 
             <h2>5. PRAKTIK 1 CLASS MAHASISWA </h2>
-
-            <p>
-                Jika data privat adalah ruang tersembunyi, maka getter adalah <strong>jendela</strong> yang memungkinkan
-                kita melihat ke dalam tanpa bisa menyentuh. Getter adalah method khusus yang memberikan akses baca
-                (read-only) ke field privat, menjaga agar data tidak termodifikasi secara langsung.
-            </p>
-
-            <p>
-                Dalam praktiknya, getter bisa melakukan lebih dari sekadar mengembalikan nilai. Ia bisa melakukan
-                komputasi, formatting, atau bahkan logging setiap kali data diakses. Getter adalah bentuk
-                <strong>controlled transparency</strong>—kita bisa melihat, tapi tidak bisa mengubah tanpa melalui
-                mekanisme yang ditentukan.
-            </p>
-
+            
             <pre><code>
 // Nama        : Putra Dhafir Nashrullah
 // NIM         : 251410009
@@ -699,14 +682,6 @@ void main() {
         <div class="section" id="section6">
 
             <h2>6. ENKAPSULASI CLASS PERSON </h2>
-
-            <p>
-                Jika getter adalah jendela, maka setter adalah <strong>pintu gerbang</strong> yang dijaga ketat. Setter
-                memungkinkan perubahan data privat, namun dengan aturan yang telah ditentukan. Sebelum nilai baru
-                disimpan, setter bisa melakukan validasi, sanitasi, atau bahkan menolak perubahan jika tidak memenuhi
-                syarat.
-            </p>
-
             <p>
                 Inilah esensi enkapsulasi: <em>jangan biarkan data mentah keluar, jangan biarkan data sembarangan
                     masuk</em>. Setter adalah filter yang memastikan hanya data berkualitas yang boleh mengubah keadaan
@@ -742,18 +717,14 @@ void main() {
         <div class="section" id="section7">
 
             <h2>7. CLASS GETTER DAN SETTER </h2>
-
             <p>
-                Dalam hidup, kita bisa mencapai tujuan melalui berbagai jalan. Demikian pula dalam Dart, sebuah class
-                bisa memiliki banyak constructor—masing-masing menawarkan cara berbeda untuk menciptakan objek. Inilah
-                yang disebut <strong>named constructor</strong>.
-            </p>
-
-            <p>
-                Named constructor memungkinkan kita memberikan nama yang deskriptif pada setiap cara penciptaan objek.
-                Misalnya, Mahasiswa.baru(), Mahasiswa.fromJson(), Mahasiswa.anonim(). Setiap constructor bisa memiliki
-                logika inisialisasi yang berbeda, namun semuanya menghasilkan objek dari class yang sama. Ini adalah
-                bentuk <strong>creational polymorphism</strong>—satu class, banyak cara lahir.
+                Getter dan Setter adalah method dalam Pemrograman Berorientasi 
+                Objek (OOP) yang digunakan untuk mengambil
+                (getter) dan mengubah (setter) nilai 
+                dari sebuah variabel dalam class. Biasanya
+                digunakan bersama dengan konsep enkapsulasi
+                untuk mengontrol 
+                akses terhadap data.
             </p>
 
             <pre><code>
@@ -804,7 +775,7 @@ void main() {
         <!-- 8 -->
         <div class="section" id="section8">
 
-            <h2>8. CLASS PRODUK </h2>
+            <h2>8. CLASS PRODUK VALIDASI </h2>
 
             <p>
                 Setelah memahami teori, mari kita lihat enkapsulasi dalam skenario nyata: <strong>sistem login</strong>.
@@ -812,14 +783,7 @@ void main() {
                 akses langsung dari luar—semua interaksi harus melalui method publik yang sudah divalidasi.
             </p>
 
-            <p>
-                Inilah keindahan enkapsulasi: pengguna class hanya perlu tahu <em>apa yang bisa dilakukan</em> (method
-                cekLogin), tanpa perlu tahu <em>bagaimana data disimpan</em> (field _username, _password). Kita bisa
-                mengubah struktur internal kapan saja—misalnya menambahkan enkripsi, hashing, atau database—tanpa
-                mengganggu kode yang menggunakan class ini.
-            </p>
-
-            <pre><code>
+         <pre><code>
 // Nama  : PUTRA DHAFIR NASHRULLAH
 // Nim   : 251410009
 // Kelas : SI2A
@@ -884,19 +848,6 @@ void main() {
         <div class="section" id="section9">
 
             <h2>9. PRAKTIK REKENING BANK </h2>
-
-            <p>
-                Setiap class adalah blueprint yang mendefinisikan struktur dan perilaku objek. Seperti cetakan kue yang
-                menentukan bentuk akhir kue, class menentukan bagaimana objek akan diciptakan dan berinteraksi. Dalam
-                pemrograman berorientasi objek, class adalah fondasi dari segalanya.
-            </p>
-
-            <p>
-                Class membungkus data (properti) dan perilaku (method) dalam satu kesatuan yang kohesif. Ini adalah
-                bentuk abstraksi yang memungkinkan kita memodelkan entitas dunia nyata ke dalam kode. Semakin baik
-                desain class, semakin mudah pula kita membangun sistem yang kompleks.
-            </p>
-
             <pre><code>
 // Nama        : Putra Dhafir Nashrullah
 // NIM         : 251410009
@@ -950,20 +901,7 @@ void main() {
         <div class="section" id="section10">
 
             <h2>10. PRAKTIK CLASS USER </h2>
-
-            <p>
-                Enkapsulasi adalah prinsip membungkus data dan method dalam satu kesatuan serta menyembunyikan detail
-                internal dari dunia luar. Dalam class Lingkaran ini, kita akan melihat bagaimana properti seperti
-                jari-jari (_jariJari) disembunyikan dan hanya dapat diakses melalui getter dan setter yang telah
-                divalidasi.
-            </p>
-
-            <p>
-                Dengan getter, kita bisa menghitung luas dan keliling lingkaran secara dinamis berdasarkan nilai
-                jari-jari yang tersimpan. Setter memastikan bahwa jari-jari tidak boleh bernilai negatif—menjaga agar
-                objek selalu dalam keadaan valid. Inilah kekuatan enkapsulasi: data terlindungi, perilaku terkendali.
-            </p>
-
+        
             <pre><code>
 // Nama        : Putra Dhafir Nashrullah
 // NIM         : 251410009
