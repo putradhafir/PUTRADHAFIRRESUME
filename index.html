@@ -243,13 +243,43 @@ function closeModal() {
     </div>
 </div>
 
-<!-- ========== SECTION 1: SEALED CLASS ========== -->
+<!-- 1 -->
 <div class="section">
-    <h2>1. Pengertian Sealed Class</h2>
-    <p><strong>Sealed class</strong> adalah jenis class dalam Dart yang membatasi pewarisan hanya dalam satu file yang sama. Pembatasan ini memungkinkan pengembang untuk mengontrol semua class turunan secara lebih jelas. Dengan sealed class, program menjadi lebih aman, terorganisir, dan mudah dipahami.</p>
-    <p>Pada program, <code>ApiResponse</code> digunakan sebagai sealed class dengan dua turunan, yaitu <code>Success</code> dan <code>Error</code>. Kedua class tersebut merepresentasikan kondisi berhasil dan gagal. Hal ini memudahkan pengelolaan alur program serta pengecekan tipe data.</p>
-    
-    <div class="code-box"><code>// Nama  : PUTRA DHAFIR NASHRULLAH
+<h2>1. Pengenalan Sealed Class </h2>
+<p><b>Pengertian Sealed Class:</b></p>
+
+<ul>
+  <li>
+    Sealed class adalah jenis class dalam Dart yang membatasi pewarisan hanya 
+    dalam satu file yang sama.
+  </li>
+
+  <li>
+    Pembatasan ini memungkinkan pengembang untuk mengontrol semua class turunan 
+    secara lebih jelas.
+  </li>
+
+  <li>
+    Dengan sealed class, program menjadi lebih aman, terorganisir, dan mudah dipahami.
+  </li>
+
+  <li>
+    Pada program, ApiResponse digunakan sebagai sealed class dengan dua turunan, 
+    yaitu Success dan Error.
+  </li>
+
+  <li>
+    Kedua class tersebut merepresentasikan kondisi berhasil dan gagal.
+  </li>
+
+  <li>
+    Hal ini memudahkan pengelolaan alur program serta pengecekan tipe data.
+  </li>
+</ul>
+<h3>Kode Program VS Code:</h3>
+<div class="code-box">
+<pre><code>
+// Nama  : Putra Dhafir Nashrullah
 // NIM   : 251410009
 // Kelas : SI2A
 
@@ -265,58 +295,18 @@ class Error extends ApiResponse {
   Error(this.errorMessage);
 }
 
-void handleResponse(ApiResponse response) {
-  if (response is Success) {
-    print("Success: ${response.message}");
-  } else if (response is Error) {
-    print("Error: ${response.errorMessage}");
-  }
-}
-
 void main() {
-  handleResponse(Success("Data berhasil diambil"));
-  handleResponse(Error("Terjadi kesalahan"));
-}</code></div>
-    
+  print("Contoh penggunaan Sealed Class");
+}
+</code></pre>
+</div>
 <button class="button" onclick="showContent('img1')">
 Tampilkan VS Code 1
 </button>
 
 <img id="img1" src="vscode1.png" style="display:none;">
-</div>
-
-<!-- ========== SECTION 2: KEYWORD FINAL ========== -->
-<div class="section">
-    <h2>2. Keyword final</h2>
-    <p><strong>Final class</strong> adalah class yang tidak dapat diwarisi atau di-extend oleh class lain. Tujuan penggunaan final class adalah untuk menjaga konsistensi struktur dan perilaku class agar tidak berubah. Pada program, class <code>Settings</code> merupakan final class yang memiliki atribut seperti <code>theme</code> dan <code>fontSize</code>. Class ini digunakan untuk menyimpan dan mengelola pengaturan aplikasi. Karena tidak dapat diwarisi, class ini lebih aman dari perubahan yang tidak diinginkan melalui pewarisan.</p>
+</div> 
     
-    <div class="code-box"><code>// Nama  : PUTRA DHAFIR NASHRULLAH
-// NIM   : 251410009
-// Kelas : SI2A
-
-final class Settings {
-  String theme;
-  int fontSize;
-
-  Settings({required this.theme, required this.fontSize});
-
-  void showSettings() {
-    print("Theme: $theme, Font Size: $fontSize");
-  }
-}
-
-void main() {
-  Settings settings = Settings(theme: "Dark", fontSize: 14);
-  settings.showSettings();
-}</code></div>
-    
-    <div class="button-group">
-        <button class="button" onclick="runDart('dart2', 'https://dartpad.dev/embed-dart.html?id=2b00e1cfd11393809a39dbc7b9c37127&theme=dark')">▶ Jalankan di DartPad</button>
-        <button class="button vscode" onclick="showVSImage()">📁 Lihat di VS Code</button>
-    </div>
-    <iframe id="dart2" src=""></iframe>
-</div>
-
 <!-- ========== SECTION 3: POLIMORFISME ========== -->
 <div class="section">
     <h2>3. Polimorfisme (Method Overriding)</h2>
